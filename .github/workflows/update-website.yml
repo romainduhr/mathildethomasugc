@@ -1,0 +1,28 @@
+name: Update Site with httrack
+
+on:
+  workflow_dispatch:  
+
+jobs:
+  update-site:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install httrack
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y httrack
+
+      - name: Mirror website
+        run: httrack "https://romainduhr.github.io/website" -O "." 
+      
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "rom.duhr@gmail.com"  
+          git config --local user.name "romainduhr"  # Configurer un nom d'utilisateur
+          git add .
+          git commit -m "Mise à jour du site avec httrack" || echo "Aucune mise à jour" 
+          git push https://romainduhr:${{ secrets.MY_GITHUB_TOKEN }}@github.com/romainduhr/mathildethomasugc.git
