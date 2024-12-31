@@ -25,4 +25,4 @@ jobs:
           git config --local user.name "romainduhr"  # Configurer un nom d'utilisateur
           git add .
           git commit -m "Mise à jour du site avec httrack" || echo "Aucune mise à jour" 
-          git push https://romainduhr:${{ secrets.MY_GITHUB_TOKEN }}@github.com/romainduhr/mathildethomasugc.git
+          git push https://${{ secrets.MY_GITHUB_TOKEN }}@github.com/romainduhr/mathildethomasugc.git
